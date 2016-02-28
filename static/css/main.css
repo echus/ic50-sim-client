@@ -1,0 +1,18 @@
+/* Bootstrap mods */
+.input-group-addon-width {
+    min-width: 100px;
+    text-align: left;
+}
+
+.form-horizontal .control-label {
+    text-align: left;
+}
+
+.form-group {
+    width: 100%;
+}
+
+
+#params-nmr-1to2 {
+    display: none;
+}

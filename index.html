@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>IC50 Simulator</title>
+
+        <!-- Global custom CSS -->
+        <!-- <link href="{% static "compass/stylesheets/styles.css" %}" rel="stylesheet" type="text/css" /> -->
+
+        <!-- Site stylesheet to override vendor settings -->
+        <link rel="stylesheet" href="http://new.supramolecular.org/static/css/base.css">
+        <link href="static/css/main.css" rel="stylesheet" type="text/css" />
+
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+    </head>
+
+    <body>
+        <header id="navbar-container">
+            <div class="navbar navbar-head navbar-inverse">
+                <div class="navbar-header">
+                    <h1 class="navbar-brand">
+                        <a href="/">
+                            <span class="sr-only"></span>
+                            IC50 Simulator
+                        </a>
+                    </h1>
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".js-navbar-header">
+                        <span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
+                    </button>
+                </div>
+                
+                <h2 class="sr-only">Shortcuts</h2>
+                <ul class="skip-links">
+                    <li><a href="/" title="[Alt + 0]" accesskey="0">Go to home</a></li>
+                    <li><a href="#page-navigation" title="[Alt + 1]" accesskey="1">Jump to navigation</a></li>
+                    <li><a href="#page-content" title="[Alt + 2]" accesskey="2">Jump to content</a></li>
+                    <li><a href="#page-footer" title="[Alt + 3]" accesskey="3">Contact</a></li>
+                </ul>
+
+                <div class="navbar-collapse collapse js-navbar-header">
+                        <nav class="nav navbar-main navbar-left" id="page-navigation" role="navigation">
+                            <h2 class="sr-only">Navigation</h2>
+                            <ul class="nav navbar-nav">
+                                <li class="child first">
+                                    <a href="http://supramolecular.org/">
+                                        <span>Back to Supramolecular Home</span>
+                                    </a>
+                                </li>
+                                <!--
+                                <li class="child children dropdown active last">
+                                    <a href="/apps/" class="dropdown-toggle" data-toggle="dropdown">
+                                        <span>Apps <span class="caret"></span></span>
+                                    </a>
+                                    <ul class="dropdown-menu" role="menu">
+
+                                        <li class="child first last">
+                                            <a href="http://app.supramolecular.echus.co/bindfit/">
+                                                <span>Bindfit</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                -->
+
+                                <li class="divider" role="presentation"><span class="sr-only">Separator</span></li>
+                            </ul>
+                        </nav>
+                </div> <!-- navbar-collapse -->
+            </div> <!-- navbar -->
+        </header>
+
+        <!-- Page Content -->
+        <div class="container-fluid">
+            <div class="row">
+                <div id="control" class="col-xs-12 col-md-4"> 
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Control</h3>
+                    </div>
+                    <div class="panel-body">
+                        <form class="form-horizontal">
+                            <div class="form-group">
+                                <div class="col-xs-12">
+                                    <div class="col-xs-12">
+                                        <select id="selector" class="form-control">
+                                            <option value="ic50">IC50</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+
+                        <form id="params-ic50" class="form-horizontal">
+                            <div class="form-group">
+                                <label for="params-ic50-logic50" class="col-xs-4 control-label">LogIC50</label>
+                                <div class="input-group col-xs-8">
+                                    <input id="params-ic50-logic50" name="logic50" type="number" class="form-control" value="-5">
+                                    <span class="input-group-addon input-group-addon-width"></span>
+                                </div>
+
+                                <label for="params-ic50-hillslope" class="col-xs-4 control-label">HillSlope</label>
+                                <div class="input-group col-xs-8">
+                                    <input id="params-ic50-hillslope" name="hillslope" type="number" class="form-control" value="-1">
+                                    <span class="input-group-addon input-group-addon-width"></span>
+                                </div>
+
+                                <label for="params-ic50-dose-init" class="col-xs-4 control-label">Dose (min)</label>
+                                <div class="input-group col-xs-8">
+                                    <input id="params-ic50-dose-init" name="dose_init" type="number" class="form-control" value="-8">
+                                    <span class="input-group-addon input-group-addon-width">log[conc], M</span>
+                                </div>
+
+                                <label for="params-ic50-dose-final" class="col-xs-4 control-label">Dose (max)</label>
+                                <div class="input-group col-xs-8">
+                                    <input id="params-ic50-dose-final" name="dose_final" type="number" class="form-control" value="-2">
+                                    <span class="input-group-addon input-group-addon-width">log[conc], M</span>
+                                </div>
+                            </div>
+                        </form>
+
+
+
+                        <form>
+                            <div class="form-group">
+                                <div class="col-xs-offset-8 col-xs-4">
+                                    <button id="button-plot" type="button" class="btn btn-primary btn-block">Plot</button>
+                                </div>
+                            </div>
+                        </form>
+
+                    </div> <!-- panel-body -->
+                </div> <!-- panel -->
+                </div> <!-- control -->
+
+                <div id="results" class="results col-xs-12 col-md-8">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <div id="plot" class="col-xs-12">
+                            </div> <!-- plot -->
+                        </div> <!-- panel-body -->
+                    </div> <!-- panel -->
+                </div> <!-- results -->
+
+            </div> <!-- row -->
+
+        </div> <!-- container -->
+        <!-- /.container -->
+
+
+
+        <!-- jQuery (required by Bootstrap) -->
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <!-- Bootstrap Core JavaScript -->
+        <script src="/static/bootstrap.min.js"></script>
+
+        <!-- Highcharts -->
+        <script src="http://code.highcharts.com/highcharts.js"></script>
+        <script src="http://code.highcharts.com/modules/exporting.js"></script>
+        <script src="static/js/highcharts-themes/bindsim.js"></script>
+        <!-- Sim JS -->
+        <script src="static/js/ic50sim.js"></script>
+
+
+
+    </body>
+</html>
