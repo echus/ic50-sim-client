@@ -5,7 +5,7 @@ var sim = {
     // Internal globals
     i: {
         // Simulator backend root endpoint
-        endpoint: "https://api.supramolecular.echus.co/bindsim/api",
+        endpoint: "https://api.supramolecular.org/bindsim/api",
         plot_id: "plot", // ID of plot container div
         axis_response: "axis-response",
         forms: "#params-ic50",
